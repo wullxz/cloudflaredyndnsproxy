@@ -1,0 +1,11 @@
+{
+	"name": "cloudflaredyndns",
+	"description": "a proxy client to use with routers that only allow to pass variables via url (cloudflare wants POST vars)",
+	"version": "0.0.1",
+	"private": "true",
+	"dependencies": {
+		"express": "3.x",
+		"https": "1.x",
+    "dateformat": "latest"
+	}
+}
