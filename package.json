@@ -1,11 +1,29 @@
 {
-	"name": "cloudflaredyndns",
-	"description": "a proxy client to use with routers that only allow to pass variables via url (cloudflare wants POST vars)",
-	"version": "0.0.1",
-	"private": "true",
-	"dependencies": {
-		"express": "3.x",
-		"https": "1.x",
-    "dateformat": "latest"
-	}
+  "name": "cloudflaredyndns",
+  "description": "a proxy client to use with routers that only allow to pass variables via url (cloudflare wants POST vars)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node sserver.js"
+  },
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "body-parser": "latest",
+    "connect-flash": "latest",
+    "connect-mongo": "latest",
+    "cookie-parser": "latest",
+    "dateformat": "latest",
+    "ejs": "latest",
+    "express": "3.x",
+    "express-session": "latest",
+    "https": "1.x",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "nconf": "^0.8.4",
+    "passport": "latest",
+    "passport-local": "latest"
+  },
+  "author": "Meik Specht"
 }

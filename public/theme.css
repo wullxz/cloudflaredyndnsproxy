@@ -1,0 +1,64 @@
+/* TABLES */
+.table-hover tbody tr:hover td {
+	background-color: #c9ef9a;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+	background-color: #eee;
+}
+
+.table .thead-inverse {
+	color: #fff;
+	background-color: #005b99;
+}
+
+/* NAVBAR */
+.navbar-inverse {
+	background-color: #005b99;
+	border: 0px;
+	color: #d4d9db;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus
+{
+	background-color: #003b79;
+	color: #aadd6d;
+}
+
+/* MISC */
+.btn-normal {
+	background-color: #aadd6d;
+	border-color: #acdf6f;
+	color: #fff;
+}
+
+.btn-close {
+	position: relative;
+	top: 0px;
+	right: 0px;
+	color: inherit;
+	padding: 0px;
+	background: 0 0;
+	border: 0;
+	float: right;
+	font-size: 21px;
+	font-weight: 700;
+	line-height: 1;
+	font-family: inherit;
+}
+
+#alerts {
+	display: block;
+	position: relative;
+	padding: 5px 10px 20px 10px;
+	background-color: #eee;
+	margin-bottom: 20px;
+	border-radius: 4px;
+}
+
+div#alerts > #alertbox > div.alert {
+	margin-bottom: 0px;
+	margin-top: 25px;
+}
