@@ -28,7 +28,7 @@ app.use("/admin/public", express.static('public'));
 app.set('view engine', 'ejs');
 
 var sessionOpts = {
-  secret: "ifuckinglvoeschnitzel",
+  secret: "ifuckingloveschnitzel",
   maxAge: new Date(Date.now() + 3600000),
   store: new MongoStore(
       { mongooseConnection: mongoose.connection },
@@ -53,18 +53,6 @@ app.get('/admin', function (req, res, next) {
 // and destroys formatting! 0.o
 app.get(['/admin/', "/admin/*"], function (req, res, next) {
   var db = mongoose.connection;
-  User.find({ superAdmin: true }, function(err, users) {
-    console.log(JSON.stringify(users, null, 2));
-  });
-  User.count({superAdmin: true}, function(err, c) {
-    if (err) {
-      console.log("Error!");
-      console.log(err);
-      return;
-    }
-    console.log("Super-Admin count:");
-    console.log(c);
-  });
   User.count({superAdmin: true}, function(err, c) {
     if (c < 1) {
       res.render('setup', {

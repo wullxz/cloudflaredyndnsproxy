@@ -32,8 +32,24 @@ module.exports = function(app, passport) {
   }));
 
   app.get('/admin/overview', isLoggedIn, function (req, res) {
-    res.send('200');
+    res.render('overview', {
+      user: req.user,
+      title: "Overview"
+    });
   });
+
+  app.get('/admin/adduser', isAdmin, function (req, res) {
+    res.render('adduser', {
+      user: req.user,
+      title: "Add User"
+    });
+  });
+
+  app.post('/admin/adduser', isAdmin, passport.authenticate('local-add', {
+    successRedirect: '/admin/overview',
+    failureRedirect: '/admin/adduser',
+    failureFlash: true
+  }));
 
   //require('./api/routes.js')(app, isLoggedIn);
 }
@@ -43,4 +59,11 @@ function isLoggedIn(req, res, next) {
     return next();
 
   res.redirect('/admin/login');
+}
+
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.superAdmin)
+    return next();
+
+  res.redirect('/admin/overview');
 }

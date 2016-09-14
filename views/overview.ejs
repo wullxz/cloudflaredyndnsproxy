@@ -1,0 +1,41 @@
+<% include _head %>
+<body class="container">
+  <div class="row header">
+    <% include _header %>
+  </div>
+
+  <div class="row headline">
+    <h1><%= title %></h1>
+  </div>
+
+  <div class="row owndoms">
+    <div class="col-sm-10">
+      <h3><% if (user.superAdmin) { %>Own <% } %>DynDNS Domains 
+        (<%= user.domains.length %>/<%= user.maxDomains %>)</h3>
+    </div>
+    <div class="col-sm-2">
+        <button id="addUser" class="btn btn-normal btn-md">Add new...</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row owndomscontent">
+
+  </div>
+
+  <% if (user.superAdmin) { %>
+  <div class="row users">
+    <div class="col-sm-10">
+      <h3>Users</h3>
+    </div>
+    <div class="col-sm-2">
+        <a href="/admin/adduser" id="addUser" class="btn btn-normal btn-mini btn-inline">Add new...</a>
+    </div>
+  </div>
+  <hr>
+  <div class="row userscontent">
+
+  </div>
+  <% } %>
+
+</body>
+

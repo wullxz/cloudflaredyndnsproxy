@@ -58,6 +58,11 @@
 	border-radius: 4px;
 }
 
+.btn-inline {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
 div#alerts > #alertbox > div.alert {
 	margin-bottom: 0px;
 	margin-top: 25px;

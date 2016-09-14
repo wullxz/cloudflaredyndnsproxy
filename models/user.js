@@ -8,7 +8,7 @@ var userSchema = mongoose.Schema({
     password:     String,
     superAdmin:   { type: Boolean, default: false },
     domains:      [String],
-    maxDomains:   Number
+    maxDomains:   { type: Number, default:3 }
 });
 
 userSchema.methods.generateHash = function(password) {
