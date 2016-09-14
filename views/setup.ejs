@@ -3,9 +3,8 @@
   <div class="row content">
     <div class="col-sm-6 col-sm-offset-3">
       <h1>Create admin user</h1>
-      <% if (locals.message && message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-      <% } %>
+
+      <%- msgs() %>
 
       <form action="/admin/setup" method="post">
         <div class="form-group">

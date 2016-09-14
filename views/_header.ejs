@@ -1,6 +1,16 @@
 <div class="navbar navbar-inverse col-sm-12" role="navigation" style="padding: 0px 15px;">
-  <ul class="nav navbar-nav">
+  <ul class="nav navbar-nav fleft">
     <!--    <li <% if (title==="Home") { %> class="active" <% } %>><a href="/admin">Home</a></li> -->
     <li <% if (title==="Overview") { %> class="active" <% } %>><a href="/admin/overview">Overview</a></li>
   </ul>
+  <% if (typeof user !== 'undefined') { %>
+  <div class="nav navbar-nav fright dropdown">
+    <div>Hello, <%= user.name %></div>
+    <div class="dropdown-content">
+      <form action="/admin/logout" method="post">
+        <button type="submit" class="btn btn-mini btn-normal">Logout</button>
+      </form>
+    </div>
+  </div>
+  <% } %>
 </div>

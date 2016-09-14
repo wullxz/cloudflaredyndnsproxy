@@ -6,9 +6,8 @@
   <div class="row content">
     <div class="col-sm-6 col-sm-offset-3">
       <h1><span class="fa fa-sign-in"></span> Login</h1>
-      <% if (locals.message && message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-      <% } %>
+
+      <%- msgs() %>
 
       <!-- LOGIN FORM -->
       <form action="/admin/login" method="post">

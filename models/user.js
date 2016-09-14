@@ -3,12 +3,12 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = mongoose.Schema({
-    name:         String,
-    email:        String,
-    password:     String,
-    superAdmin:   { type: Boolean, default: false },
-    domains:      [String],
-    maxDomains:   { type: Number, default:3 }
+  name:         String,
+  email:        String,
+  password:     String,
+  superAdmin:   { type: Boolean, default: false },
+  domains:      [String],
+  maxDomains:   { type: Number, default:3 }
 });
 
 userSchema.methods.generateHash = function(password) {

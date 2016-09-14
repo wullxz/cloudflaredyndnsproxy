@@ -41,6 +41,11 @@ app.use(session(sessionOpts));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+// define msgs() method for templates to show flash messages
+app.use(function (req, res, next) {
+  res.locals.msgs = require('./lib/msgs.js')(req, res);
+  next();
+});
 
 // set up proper routing (trailing slash problems)
 app.enable('strict routing');
@@ -55,9 +60,7 @@ app.get(['/admin/', "/admin/*"], function (req, res, next) {
   var db = mongoose.connection;
   User.count({superAdmin: true}, function(err, c) {
     if (c < 1) {
-      res.render('setup', {
-        message: req.flash('registerError')
-      });
+      res.render('setup');
       return;
     }
     else {
