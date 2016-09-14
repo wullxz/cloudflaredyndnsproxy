@@ -80,12 +80,21 @@ module.exports = function(app, passport) {
   }
 
   app.post('/admin/moduser', isAdmin, function(req, res) {
-    userHelper.createUser(req, req.body.email, req.body.password, null, {
-      res: res,
-      successRedirect: '/admin/overview',
-      failureRedirect: '/admin/moduser',
-      failureFlash: true
-    })
+    if (req.body.id) {
+      userHelper.updateUser(req, res, {
+        successRedirect: '/admin/overview',
+        failureRedirect: '/admin/moduser',
+        appendIdToRedirect: true
+      });
+    }
+    else {
+      userHelper.createUser(req, req.body.email, req.body.password, null, {
+        res: res,
+        successRedirect: '/admin/overview',
+        failureRedirect: '/admin/moduser',
+        failureFlash: true
+      })
+    }
   });
 
   //require('./api/routes.js')(app, isLoggedIn);
