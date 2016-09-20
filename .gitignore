@@ -3,3 +3,4 @@ cfg.json
 *.swp
 *.swo
 process.json
+default.json
