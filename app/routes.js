@@ -5,14 +5,6 @@ var userHelper = require('../lib/user.js');
 
 module.exports = function(app, passport) {
 
-  app.get('/dyndns/:hostname', function (req, res) {
-    console.log("Got a request for hostname " + req.params.hostname +
-        ":\n" + JSON.stringify(req.query, null, 2));
-
-    var ddns = require('../lib/ddns.js');
-
-  });
-
   app.get("/admin/", function(req, res) {
     if (req.isUnauthenticated) {
       res.render('index', {
@@ -97,19 +89,19 @@ module.exports = function(app, passport) {
     }
   });
 
-  //require('./api/routes.js')(app, isLoggedIn);
-  }
+  require('./api/routes.js')(app, passport, isLoggedIn, isAdmin);
+}
 
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-      return next();
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated())
+    return next();
 
-    res.redirect('/admin/login');
-  }
+  res.redirect('/admin/login');
+}
 
-  function isAdmin(req, res, next) {
-    if (req.isAuthenticated() && req.user.superAdmin)
-      return next();
+function isAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.superAdmin)
+    return next();
 
-    res.redirect('/admin/overview');
-  }
+  res.redirect('/admin/overview');
+}
