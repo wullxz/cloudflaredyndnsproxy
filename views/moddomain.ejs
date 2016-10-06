@@ -1,0 +1,23 @@
+<% include _head %>
+<body class="container">
+  <div class="row header">
+    <% include _header %>
+  </div>
+
+  <h1><% if (locals.title) { %><%= title %><% } %></h1>
+  <%- msgs() %>
+
+<div class="row addform">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form action="/admin/moddomain" method="post">
+      <div class="form-group">
+        <label>Domain</label>
+        <input type="text" class="form-control" name="domain" value="">
+      </div>
+
+      <button type="submit" class="btn btn-normal btn-lg">Save</button>
+    </form>
+  </div>
+</div>
+
+</body>

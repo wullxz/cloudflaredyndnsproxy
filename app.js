@@ -21,6 +21,9 @@ require('./lib/passport.js')(passport);
 
 app.use(morgan('dev'));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({
+      extended: true
+}));
 app.use(bodyParser.json());
 
 app.use("/admin/public", express.static('public'));
@@ -29,7 +32,7 @@ app.set('view engine', 'ejs');
 
 var sessionOpts = {
   secret: "ifuckingloveschnitzel",
-  maxAge: new Date(Date.now() + 3600000),
+  maxAge: new Date(Date.now() + 7200),
   resave: true,
   saveUninitialized: true,
   store: new MongoStore(
