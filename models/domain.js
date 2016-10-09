@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var domainSchema = Schema({
   domain:     String,
-  user:       { type: Schema.ObjectId, ref: User }
+  user:       { type: Schema.ObjectId, ref: 'User' }
 });
 
 module.exports = mongoose.model('Domain', domainSchema);

@@ -15,6 +15,7 @@ var MongoStore = require('connect-mongo')(session);
 var configDB = conf.get('db');
 var User = require('./models/user.js');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url);
 
 require('./lib/passport.js')(passport);

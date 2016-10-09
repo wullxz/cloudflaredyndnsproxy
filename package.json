@@ -1,5 +1,5 @@
 {
-  "name": "cloudflaredyndns",
+  "name": "schnitzel-ddns",
   "description": "a proxy client to use with routers that only allow to pass variables via url (cloudflare wants POST vars)",
   "main": "server.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "dependencies": {
     "bcrypt-nodejs": "latest",
     "body-parser": "latest",
+    "cloudflare": "^1.0.5",
     "connect-flash": "latest",
     "connect-mongo": "latest",
     "cookie-parser": "latest",
