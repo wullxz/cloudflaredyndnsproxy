@@ -31,7 +31,7 @@
         <% user.domains.forEach(function (dom) { %>
           <tr>
             <td><a href="http://<%= dom.domain %>"><%= dom.domain %></a></td>
-            <td data-domain="<%= dom.domain %>">loading...</td>
+            <td class="domainip" data-domain="<%= dom.domain %>">loading...</td>
             <td>BUTTONS</td>
           </tr>
         <% }); %>
@@ -82,5 +82,6 @@
   </div>
   <% } %>
 
+  <script type="text/javascript" src="/admin/public/overview.js"></script>
 </body>
 
