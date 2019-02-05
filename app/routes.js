@@ -68,39 +68,48 @@ module.exports = function(app, passport) {
   });
 
   app.post('/admin/moddomain', isLoggedIn, function (req, res) {
-    console.log(JSON.stringify(req.body));
-    Domain.find({ domain: req.body.domain }).exec(function(err, domain) {
-      if (err) {
-        req.flash('error', err.message || err);
-        res.redirect('/admin/moddomain');
+    var user = req.user;
+    var dom = req.body.domain;
+    if (!user.superAdmin && !dom.match(/[a-zA-Z0-9-]\.ddns\.schnitzelspecht\.de/)) {
+      req.flash('warning', "DynDNS Domains must be direct subdomains of ddns.schnitzelspecht.de (e.g.: example.ddns.schnitzelspecht.de)!");
+      res.redirect('/admin/moddomain');
+      return;
+    }
+
+    User.findOne({ _id: user._id }).populate('domains').then(function (user) {
+      console.log("\n" + JSON.stringify(user, null, 2));
+      if (user.domains.length >= user.maxDomains) {
+        req.flash('warning', "You already have the maximum allowed DynDNS domains for your account!");
+        res.redirect('/admin/overview');
         return;
       }
 
-      if (domain && domain.length > 0) {
-        req.flash('warning', "This domain does already exist!");
-        res.redirect('/admin/moddomain');
-        return;
-      }
+      console.log("User " + JSON.stringify(req.user.name) + " tries to create domain: " + req.body.domain);
+      Domain.find({ domain: dom }).exec(function(err, domain) {
+        if (err) {
+          req.flash('error', err.message || err);
+          res.redirect('/admin/moddomain');
+          return;
+        }
 
-      var user = req.user;
-      if (!user.superAdmin && domain.match(/[a-zA-Z0-9-]\.ddns\.schnitzelspecht\.de/)) {
-        req.flash('warning', "DynDNS Domains must be direct subdomains of ddns.schnitzelspecht.de!");
-        res.redirect('/admin/moddomain');
-        return;
-      }
+        if (domain && domain.length > 0) {
+          req.flash('warning', "This domain does already exist!");
+          res.redirect('/admin/moddomain');
+          return;
+        }
 
-      // all prerequisites are matched, create ddns record
-      //TODO: create on cloudflare
-      var dom = new Domain();
-      dom.domain = req.body.domain;
-      dom.user = user;
-      dom.save();
+        // all prerequisites are matched, create ddns record
+        var dom = new Domain();
+        dom.domain = req.body.domain;
+        dom.user = user;
+        dom.save();
 
-      user.domains.push(dom);
-      user.save();
+        user.domains.push(dom);
+        user.save();
 
-      req.flash('success', "OK!");
-      res.redirect('/admin/overview');
+        req.flash('success', "OK!");
+        res.redirect('/admin/overview');
+      });
     });
   });
 

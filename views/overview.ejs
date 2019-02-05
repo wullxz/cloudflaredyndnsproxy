@@ -29,10 +29,12 @@
         </thead>
         <tbody>
         <% user.domains.forEach(function (dom) { %>
-          <tr>
+          <tr data-domain="<%= dom.domain %>">
             <td><a href="http://<%= dom.domain %>"><%= dom.domain %></a></td>
             <td class="domainip" data-domain="<%= dom.domain %>">loading...</td>
-            <td>BUTTONS</td>
+            <td>
+              <button class="glyphicon glyphicon-remove" data-domain="<%= dom.domain %>"></button>
+            </td>
           </tr>
         <% }); %>
         </tbody>

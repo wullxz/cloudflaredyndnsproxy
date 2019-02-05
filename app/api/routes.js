@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var User = require('../../models/user.js');
 var Domain = require('../../models/domain.js');
 var ddns = require('../../lib/ddns.js');
+var JSON = require('../../lib/util.js').JSON;
 
 module.exports = function(app, passport, isLoggedIn, isAdmin) {
 
@@ -20,6 +21,30 @@ module.exports = function(app, passport, isLoggedIn, isAdmin) {
       })
       .catch(function (err) {
         return res.status(400).send({ error: err, message: "Could not get information for that domain" });
+      });
+  });
+
+  app.post('/ddns/delete/', isLoggedIn, function (req, res) {
+    var domain = req.body.domain;
+    console.log("Deleting " + domain);
+    ddns.deleteDNSRecord(domain)
+      .then(Domain.findOne({ domain: domain }, function (err, dom) {
+        if (err) {
+          throw err;
+        }
+        console.log("Found domain: " + dom.domain);
+        dom.remove({}, function (err, result) {
+          console.log("Err: " + err);
+          console.log("Res: " + result);
+        });
+      }))
+      .then(function (data) {
+        // Domain deleted in database and at cloudflare. Done!
+        data.success = true;
+        res.send(data);
+      })
+      .catch(function (err) {
+        res.status(400).send("Error: " + (err.message || err));
       });
   });
 
